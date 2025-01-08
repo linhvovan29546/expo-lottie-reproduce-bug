@@ -1,10 +1,10 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, InteractionManager, Button } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-
+import LottieView from "lottie-react-native";
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
@@ -15,6 +15,24 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+      <View style={{ width: 300, height: 300 }}>
+        <LottieView
+          source={require("@/assets/BankVault.lottie")}
+          style={{ width: '100%', height: '100%' }}
+          autoPlay
+          loop
+        />
+      </View>
+      <Button
+        title="runAfterInteractions"
+        onPress={() => {
+          console.log('start task')
+          InteractionManager.runAfterInteractions(() => {
+            console.log('run task')
+          });
+        }}
+      >
+      </Button>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
